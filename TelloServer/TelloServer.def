@@ -1,0 +1,4 @@
+LIBRARY TelloServer.dll
+EXPORTS
+  DllGetClassObject PRIVATE
+  DllCanUnloadNow   PRIVATE

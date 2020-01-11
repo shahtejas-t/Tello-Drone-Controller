@@ -1,0 +1,64 @@
+import "unknwn.idl" ;
+// ITello Interface
+[
+  object,
+  uuid(F19F090F-DB2F-45B7-AD2A-50639F1771B1),// IID Of ITello
+  helpstring("ITello Interface"),
+  pointer_default(unique),
+  dual,
+  oleautomation
+]
+interface ITello : IDispatch
+{
+  import "oaidl.idl";
+  HRESULT EnterCommandMode([out,retval]int *);
+  HRESULT Takeoff([out,retval]int *);
+  HRESULT Land([out,retval]int *);
+  HRESULT StreamOn([out,retval]int *);
+  HRESULT StreamOff([out,retval]int *);
+  HRESULT EmergencyShutdown([out,retval]int *);
+  HRESULT FlyUp([in]int, [out,retval]int *);
+  HRESULT FlyDown([in]int, [out,retval]int *);
+  HRESULT FlyLeft([in]int, [out,retval]int *);
+  HRESULT FlyRight([in]int, [out,retval]int *);
+  HRESULT FlyForward([in]int, [out,retval]int *);
+  HRESULT FlyBack([in]int, [out,retval]int *);
+  HRESULT FlyClockWise([in]int, [out,retval]int *);
+  HRESULT FlyCounterClockWise([in]int, [out,retval]int *);
+  HRESULT FlyFlip([in]char, [out,retval]int *);
+  HRESULT GoTo([in]int, [in]int, [in]int, [in]int, [out,retval]int *);
+  HRESULT FlyInCurve([in]int ,[in]int, [in]int, [in]int, [in]int, [in]int, [in]int, [out,retval]int *);
+    // Setter
+  HRESULT SetSpeed([in]int, [out,retval]int *);
+  HRESULT SendRcControlviaFourChannels([in]int ,[in]int, [in]int, [in]int, [out,retval]int *);
+    // Getter
+  HRESULT GetSpeedValue([out,retval]int *);
+  HRESULT GetBatteryPercent([out,retval]int *);
+  HRESULT GetTimeValue([out,retval]int *);
+  HRESULT GetHeightValue([out,retval]int *);
+  HRESULT GetTempratureCelciusDegree([out,retval]int *);
+  HRESULT GetAttitudeValue([out,retval]int *);
+  HRESULT GetBarometerValue([out,retval]int *);
+  HRESULT GetAccelerationValue([out,retval]int *);
+  HRESULT GetTOF([out,retval]int *);
+  HRESULT GetWifiSNR([out,retval]int *);
+};
+// The Actual TypeLib Related code
+[
+  uuid(D5A8A70A-FB65-45E5-A6F9-6546E62D3E73),// LIBID Of Type Library
+  version(1.0),//major version number.minor version number
+  helpstring("TelloAutomation Component's Type Library")
+]
+library TelloServerTypeLib
+{
+  importlib("stdole32.tlb");
+  // component code
+  [
+    uuid(35EF76EC-BEF8-4551-91A3-2A9E1DA2F12A),// CLSID of Tello Component
+    helpstring("TelloAutomation Component Class")
+  ]
+  coclass CTello
+  {
+    [default]interface ITello;
+  };
+};
